@@ -3,24 +3,25 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
+using System.Runtime.ConstrainedExecution;
 
 namespace CaseAccenture.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmpresaController : ControllerBase
+    public class FornecedorController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        public EmpresaController(IConfiguration configuration)
+        public FornecedorController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
         [HttpGet]
-        [Route("GetEmpresas")]
-        public JsonResult GetEmpresas()
+        [Route("GetFornecedores")]
+        public JsonResult GetFornecedores()
         {
-            string query = "select * from Empresa";
+            string query = "select * from Fornecedor";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("AccentureCon");
@@ -41,10 +42,10 @@ namespace CaseAccenture.Controllers
 
 
         [HttpPost]
-        [Route("PostEmpresas")]
-        public JsonResult PostEmpresas(Empresa emp)
+        [Route("PostFornecedores")]
+        public JsonResult PostFornecedores(Fornecedor fornc)
         {
-            string query = @"insert into Empresa values (@CNPJ, @NomeFantasia, @CEP)";
+            string query = @"insert into Fornecedor values (@CNPJ, @CPF, @RG, @DataNasc, @Nome, @Email, @CEP)";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("AccentureCon");
@@ -54,9 +55,13 @@ namespace CaseAccenture.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@CNPJ", emp.CNPJ);
-                    myCommand.Parameters.AddWithValue("@NomeFantasia", emp.NomeFantasia);
-                    myCommand.Parameters.AddWithValue("@CEP", emp.CEP);
+                    myCommand.Parameters.AddWithValue("@CNPJ", fornc.CNPJ);
+                    myCommand.Parameters.AddWithValue("@CPF", fornc.CPF);
+                    myCommand.Parameters.AddWithValue("@RG", fornc.RG);
+                    myCommand.Parameters.AddWithValue("@DataNasc", fornc.DataNasc);
+                    myCommand.Parameters.AddWithValue("@Nome", fornc.Nome);
+                    myCommand.Parameters.AddWithValue("@Email", fornc.Email);
+                    myCommand.Parameters.AddWithValue("@CEP", fornc.CEP);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
@@ -67,14 +72,18 @@ namespace CaseAccenture.Controllers
         }
 
         [HttpPut]
-        [Route("PutEmpresas")]
-        public JsonResult PutEmpresas(Empresa emp)
+        [Route("PutFornecedores")]
+        public JsonResult PutFornecedores(Fornecedor fornc)
         {
-            string query = @"update Empresa
+            string query = @"update Fornecedor
                             set CNPJ = @CNPJ,
-                            NomeFantasia = @NomeFantasia,
+                            CPF = @CPF,
+                            RG = @RG,
+                            DataNasc = @DataNasc,
+                            Nome = @Nome,
+                            Email = @Email,
                             CEP = @CEP
-                            where EmpresaID = @EmpresaID";
+                            where FornecedorID = @FornecedorID";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("AccentureCon");
@@ -84,10 +93,14 @@ namespace CaseAccenture.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@EmpresaID", emp.EmpresaID);
-                    myCommand.Parameters.AddWithValue("@CNPJ", emp.CNPJ);
-                    myCommand.Parameters.AddWithValue("@NomeFantasia", emp.NomeFantasia);
-                    myCommand.Parameters.AddWithValue("@CEP", emp.CEP);
+                    myCommand.Parameters.AddWithValue("@CNPJ", fornc.CNPJ);
+                    myCommand.Parameters.AddWithValue("@CPF", fornc.CPF);
+                    myCommand.Parameters.AddWithValue("@RG", fornc.RG);
+                    myCommand.Parameters.AddWithValue("@DataNasc", fornc.DataNasc);
+                    myCommand.Parameters.AddWithValue("@Nome", fornc.Nome);
+                    myCommand.Parameters.AddWithValue("@Email", fornc.Email);
+                    myCommand.Parameters.AddWithValue("@CEP", fornc.CEP);
+                    myCommand.Parameters.AddWithValue("FornecedorID", fornc.FornecedorID);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
@@ -98,10 +111,10 @@ namespace CaseAccenture.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteEmpresas")]
-        public JsonResult DeleteEmpresas(int id)
+        [Route("DeleteFornecedores")]
+        public JsonResult DeleteFornecedores(int id)
         {
-            string query = @"delete from Empresa where EmpresaID = @EmpresaID";
+            string query = @"delete from Fornecedor where FornecedorID = @FornecedorID";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("AccentureCon");
@@ -111,7 +124,7 @@ namespace CaseAccenture.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@EmpresaID", id);
+                    myCommand.Parameters.AddWithValue("@FornecedorID", id);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
