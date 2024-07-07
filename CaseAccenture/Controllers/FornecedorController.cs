@@ -17,6 +17,7 @@ namespace CaseAccenture.Controllers
             _configuration = configuration;
         }
 
+        /*Função para BUSCAR Fornecedores*/
         [HttpGet]
         [Route("GetFornecedores")]
         public JsonResult GetFornecedores()
@@ -40,7 +41,7 @@ namespace CaseAccenture.Controllers
             return new JsonResult(table);
         }
 
-
+        /*Função para CRIAR novos Fornecedores*/
         [HttpPost]
         [Route("PostFornecedores")]
         public JsonResult PostFornecedores(Fornecedor fornc)
@@ -71,6 +72,7 @@ namespace CaseAccenture.Controllers
             return new JsonResult("Inserção realizada com sucesso!");
         }
 
+        /*Função para EDITAR Fornecedores*/
         [HttpPut]
         [Route("PutFornecedores")]
         public JsonResult PutFornecedores(Fornecedor fornc)
@@ -110,6 +112,7 @@ namespace CaseAccenture.Controllers
             return new JsonResult("Edição realizada com sucesso!");
         }
 
+        /*Função para DELETAR Fornecedores*/
         [HttpDelete]
         [Route("DeleteFornecedores")]
         public JsonResult DeleteFornecedores(int id)
