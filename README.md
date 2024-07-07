@@ -6,9 +6,9 @@
 * A linguagem utilizada para criação da tela do Frontend foi *VUE.JS e HTML*
 
 - Foi necessária a instalação das seguintes ferrementas:
-  * [Visual Studio](https://visualstudio.microsoft.com/pt-br/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&passive=false)
-  * [SSMS - SQL SERVER MANAGEMENT STUDIO](https://aka.ms/ssmsfullsetup)
-  * [SQL SERVER](https://go.microsoft.com/fwlink/p/?linkid=2215158&clcid=0x409&culture=en-us&country=us)
+  * [Visual Studio](https://visualstudio.microsoft.com/pt-br/downloads/)
+  * [SSMS - SQL SERVER MANAGEMENT STUDIO](https://learn.microsoft.com/pt-br/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16)
+  * [SQL SERVER](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
 
 ## 📌 Informações sobre o desenvolvimento do case e imagens da aplicação
 
